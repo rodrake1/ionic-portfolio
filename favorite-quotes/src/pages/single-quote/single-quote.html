@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Frases Favoritas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col no-padding>
+          {{ quoteData.category }}
+        </ion-col>
+        <ion-col no-padding text-right>
+          <ion-icon name="md-heart" color="primary" (click)="onClose(true)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <blockquote>{{ quoteData.quote.text }}</blockquote>
+      <p class="author">{{ quoteData.quote.person }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-row>
+    <ion-col text-center>
+      <button ion-button outline (click)="onClose()">Fechar</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

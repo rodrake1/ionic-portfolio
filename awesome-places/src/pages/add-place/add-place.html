@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Novo Lugar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <ion-list inset>
+      <ion-item>
+        <ion-input type="text" placeholder="Nome do lugar..." name="title" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea type="text" placeholder="Descrição..." name="description" ngModel required></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-grid text-center>
+      <h5>Escolha um local</h5>
+      <ion-row>
+        <ion-col>
+          <button type="button" ion-button outline block icon-left (click)="onLocate()">
+            <ion-icon name="locate"></ion-icon>
+            Meu Local
+          </button>
+        </ion-col>
+        <ion-col>
+          <button type="button" ion-button outline block icon-left (click)="onOpenMap()">
+            <ion-icon name="map"></ion-icon>
+            Ver Mapa
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="locationIsSet">
+        <ion-col>
+          <agm-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="16">
+            <agm-marker [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
+          </agm-map>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Escolha uma imagem</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button type="button" ion-button outline block icon-left (click)="onTakePhoto(1)">
+            <ion-icon name="camera"></ion-icon>
+            Tirar Foto
+          </button>
+        </ion-col>
+        <ion-col>
+          <button type="button" ion-button outline block icon-left (click)="onTakePhoto(0)">
+            <ion-icon name="images"></ion-icon>
+            Galeria
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="imagePath">
+        <ion-col>
+          <img [src]="imagePath">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button type="submit" ion-button color="secondary" block [disabled]="form.invalid || !locationIsSet || !imagePath">
+            Adicionar Lugar
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button type="button" ion-button color="danger" outline block navPop>
+            Cancelar
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

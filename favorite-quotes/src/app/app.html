@@ -1,0 +1,25 @@
+<ion-menu [content]="nav">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="onLoad(0)">
+        <ion-icon name="md-heart" item-left></ion-icon>
+        Favoritas
+      </button>
+      <button ion-item (click)="onLoad(1)">
+        <ion-icon name="md-book" item-left></ion-icon>
+        Biblioteca
+      </button>
+      <button ion-item (click)="onLoad(2)">
+        <ion-icon name="md-settings" item-left></ion-icon>
+        Configurações
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="tabsPage" #nav></ion-nav>
