@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ mode }} Receita</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="recipeForm" (ngSubmit)="onAddRecipe()">
+    <ion-list inset>
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Dificuldade</ion-label>
+        <ion-select formControlName="difficulty">
+          <ion-option *ngFor="let option of selectOptions" [value]="option">{{ option }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list formArrayName="ingredients" inset>
+      <ion-row>
+        <ion-list-header>
+          Ingredientes: {{ getIngredientControls().length }}
+          <button ion-button item-right clear type="button" (click)="onAddNewIngredient()">Novo</button>
+        </ion-list-header>
+      </ion-row>
+      <ion-item-sliding *ngFor="let ingredientControl of getIngredientControls(); let i = index" [formGroupName]="i">
+        <ion-item>
+          <ion-input type="text" formControlName="name" placeholder="Ingrediente"></ion-input>
+          <ion-input type="text" formControlName="amount" placeholder="Quantidade" text-right></ion-input>
+        </ion-item>
+        <ion-item-options>
+          <button type="button" ion-button color="danger" (click)="onRemoveIngredient(i)">Remover</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-row padding>
+      <ion-col>
+        <button ion-button type="button" block outline (click)="onClose()">Cancelar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button type="submit" block [disabled]="recipeForm.invalid || !recipeForm.dirty">{{ mode === 'Nova'
+          ?
+          'Adicionar' : 'Atualizar' }}</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

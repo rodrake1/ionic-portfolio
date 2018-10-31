@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onShowOptions($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Lista de Compras</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col text-center>
+      <h4>Adicionar Item</h4>
+    </ion-col>
+  </ion-row>
+  <form (ngSubmit)="onAddIngredient(form)" #form="ngForm">
+    <ion-list inset>
+      <ion-item>
+        <ion-label fixed>Nome</ion-label>
+        <ion-input type="text" name="ingredientName" placeholder="Ex.: Leite" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Quantidade</ion-label>
+        <ion-input type="number" name="amount" placeholder="Ex.: 2" ngModel required></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button type="submit" block [disabled]="form.invalid">Adicionar</button>
+    </div>
+  </form>
+  <ion-list inset>
+    <ion-list-header>
+      {{ !ingredients || ingredients.length === 0 ? 'Nenhum item na lista' : 'Itens na lista: ' +
+      ingredients.length }}
+    </ion-list-header>
+    <ion-item *ngFor="let ingredient of ingredients; let i = index" (tap)="onTapItem(ingredient, i)">
+      <ion-row>
+        <ion-col>
+          <h3>{{ ingredient.name }}</h3>
+        </ion-col>
+        <ion-col text-right>
+          <h3>{{ ingredient.amount }}</h3>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

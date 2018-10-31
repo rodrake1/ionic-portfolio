@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ recipe.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>{{ recipe.title }}</h3>
+        <ion-note><i>{{ recipe.difficulty }}</i></ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>{{ recipe.description }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-list-header>
+            Ingredientes: {{ recipe.ingredients.length }}
+          </ion-list-header>
+          <ion-item *ngFor="let ingredient of recipe.ingredients">
+            <ion-row>
+              <ion-col>
+                <h3>{{ ingredient.name }}</h3>
+              </ion-col>
+              <ion-col text-right>
+                <h3>{{ ingredient.amount }}</h3>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button clear (click)="onAddToShoppingList()">Adicionar à Lista de Compras</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button outline block (click)="onEditRecipe()">Editar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="danger" (click)="onRemoveRecipe()">Remover</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

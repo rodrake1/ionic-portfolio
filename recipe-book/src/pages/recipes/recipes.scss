@@ -1,0 +1,5 @@
+page-recipes {
+  button[no-lines].bottom-line {
+    border-bottom: 1px solid color($colors, line);
+  }
+}

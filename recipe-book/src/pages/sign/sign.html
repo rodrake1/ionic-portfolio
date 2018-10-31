@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ pageOption }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #form="ngForm" (ngSubmit)="pageOption === 'Cadastrar' ? onSignup(form) : onSignin(form)">
+    <ion-list>
+      <ion-item>
+        <ion-input type="email" name="email" placeholder="Email" ngModel required email></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" name="password" placeholder="Senha" minlength="6" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+      <ion-item *ngIf="pageOption === 'Cadastrar'">
+        <ion-input type="password" name="password-confirmation" placeholder="Confirmar senha" [(ngModel)]="passwordConfirmation" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button *ngIf="pageOption === 'Cadastrar'" type="submit" ion-button block [disabled]="form.invalid || !checkPassword()">{{ pageOption }}</button>
+    <button *ngIf="pageOption === 'Entrar'" type="submit" ion-button block [disabled]="form.invalid">{{ pageOption }}</button>
+  </form>
+</ion-content>
