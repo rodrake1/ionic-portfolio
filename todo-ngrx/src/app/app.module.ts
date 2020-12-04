@@ -11,6 +11,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { tarefasReducer } from "./store/reducers/tarefas.reducers";
+import { environment } from 'src/environments/environment';
+import { storeFreeze } from 'ngrx-store-freeze';
+
+export const metaReducers = !environment.production ? [storeFreeze]: [];
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +23,7 @@ import { tarefasReducer } from "./store/reducers/tarefas.reducers";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    StoreModule.forRoot({ tarefas: tarefasReducer }),
+    StoreModule.forRoot({ tarefas: tarefasReducer }, { metaReducers }),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
