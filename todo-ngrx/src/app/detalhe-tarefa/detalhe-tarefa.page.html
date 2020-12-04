@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title>{{ titulo }}</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label>Título</ion-label>
+      <ion-input formControlName="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Data</ion-label>
+      <ion-input formControlName="data"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Feita</ion-label>
+      <ion-toggle formControlName="feita"></ion-toggle>
+    </ion-item>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-button
+        [routerLink]="'/home'"
+        (click)="salvarTarefa()"
+        [disabled]="form.invalid"
+        >Salvar</ion-button
+      >
+      <ion-button
+        [routerLink]="'/home'"
+        *ngIf="id !== 'nova'"
+        color="danger"
+        (click)="removerTarefa()"
+        >Remover</ion-button
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>

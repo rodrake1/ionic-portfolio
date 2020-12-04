@@ -1,0 +1,11 @@
+<ion-item *ngIf="tarefa" [detail]="false">
+  <div slot="start" [class]="tarefa.feita ? 'dot dot-feito' : 'dot'"></div>
+  <ion-label class="ion-text-wrap">
+    <h2>
+      {{ tarefa.titulo }}
+      <span class="date">
+        <ion-note>{{ tarefa.data }}</ion-note>
+      </span>
+    </h2>
+  </ion-label>
+</ion-item>
