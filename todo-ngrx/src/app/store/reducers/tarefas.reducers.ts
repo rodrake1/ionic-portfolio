@@ -28,6 +28,10 @@ const estadoInicial: Tarefa[] = [
 export const tarefasReducer = createReducer(
   estadoInicial,
   on(TarefasActions.adicionarTarefa, (state, { tarefa }) => [...state, tarefa]),
+  // on(TarefasActions.adicionarTarefa, (state, { tarefa }) => {
+  //   state.push(tarefa);
+  //   return state;
+  // }),
   on(TarefasActions.atualizarTarefa, (state, { tarefa, id }) => {
     const tarefas = state.map((tarefaAntiga, index) => {
       if (index !== parseInt(id, 10) - 1) {

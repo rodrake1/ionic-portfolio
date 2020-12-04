@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Tarefa } from '../store/reducers/tarefas.reducers';
@@ -8,6 +8,7 @@ import * as TarefasSelectors from "../store/selectors/tarefas.selectors";
   selector: "app-home",
   templateUrl: "home.page.html",
   styleUrls: ["home.page.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePage implements OnInit {
   tarefas$: Observable<Tarefa[]>;
