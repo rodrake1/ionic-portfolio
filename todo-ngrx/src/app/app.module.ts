@@ -10,6 +10,7 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { tarefasReducer } from "./store/reducers/tarefas.reducers";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ tarefas: tarefasReducer }),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
