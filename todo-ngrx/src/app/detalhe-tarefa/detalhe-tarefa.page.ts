@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { TarefaService, Tarefa } from "../services/tarefa.service";
+import { Store } from "@ngrx/store";
+import * as TarefasActions from "../store/actions/tarefas.actions";
+import * as TarefasSelectors from "../store/selectors/tarefas.selectors";
+import { take } from "rxjs/operators";
+import { Tarefa } from '../store/reducers/tarefas.reducers';
 
 @Component({
   selector: "app-detalhe-tarefa",
@@ -18,34 +22,43 @@ export class DetalheTarefaPage implements OnInit {
   public form: FormGroup;
 
   constructor(
-    private tarefaService: TarefaService,
+    private store: Store,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    if (this.id !== "nova") {
-      this.tarefa = this.tarefaService.obterTarefa(parseInt(this.id, 10));
-    }
-    const { titulo, data, feita } = this.tarefa;
-    this.form = this.fb.group({
-      titulo: [titulo, Validators.required],
-      data: [data, Validators.required],
-      feita: [feita, Validators.required],
-    });
+    this.store
+      .select(TarefasSelectors.obterTarefa, parseInt(this.id, 10))
+      .pipe(take(1))
+      .subscribe((tarefa) => {
+        if (this.id !== "nova") {
+          this.tarefa = { ...tarefa };
+        }
+        const { titulo, data, feita } = this.tarefa;
+        this.form = this.fb.group({
+          titulo: [titulo, Validators.required],
+          data: [data, Validators.required],
+          feita: [feita, Validators.required],
+        });
+      });
   }
 
   public salvarTarefa() {
     if (this.id === "nova") {
-      this.tarefaService.adicionarTarefa(this.form.value);
+      this.store.dispatch(
+        TarefasActions.adicionarTarefa({ tarefa: this.form.value })
+      );
     } else {
-      this.tarefaService.atualizarTarefa(this.form.value, this.id);
+      this.store.dispatch(
+        TarefasActions.atualizarTarefa({ tarefa: this.form.value, id: this.id })
+      );
     }
   }
 
   public removerTarefa() {
-    this.tarefaService.removerTarefa(this.id);
+    this.store.dispatch(TarefasActions.removerTarefa({ id: this.id }));
   }
 
   public get titulo() {

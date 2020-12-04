@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Tarefa } from '../services/tarefa.service';
+import { Tarefa } from '../store/reducers/tarefas.reducers';
 
 @Component({
   selector: 'app-tarefa',

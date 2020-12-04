@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { Tarefa } from "src/app/services/tarefa.service";
+import { Tarefa } from '../reducers/tarefas.reducers';
 
 export const obterTarefas = (state: { tarefas: Tarefa[] }) => state.tarefas;
 

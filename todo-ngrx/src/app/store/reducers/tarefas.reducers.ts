@@ -1,6 +1,11 @@
 import { createReducer, on } from "@ngrx/store";
-import { Tarefa } from "src/app/services/tarefa.service";
 import * as TarefasActions from "../actions/tarefas.actions";
+
+export interface Tarefa {
+  titulo: string;
+  data: string;
+  feita: boolean;
+}
 
 const estadoInicial: Tarefa[] = [
   {

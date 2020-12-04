@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <app-tarefa
-      *ngFor="let tarefa of obterTarefas(); index as i"
+      *ngFor="let tarefa of tarefas$ | async; index as i"
       [tarefa]="tarefa"
       [routerLink]="'/tarefa/' + (i + 1)"
     ></app-tarefa>

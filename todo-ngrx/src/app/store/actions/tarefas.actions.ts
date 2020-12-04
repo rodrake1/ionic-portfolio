@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Tarefa } from "src/app/services/tarefa.service";
+import { Tarefa } from '../reducers/tarefas.reducers';
 
 export const adicionarTarefa = createAction(
   "[Detalhe Tarefa Page] Adicionar Tarefa",
